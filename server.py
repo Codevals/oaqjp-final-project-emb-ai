@@ -10,13 +10,16 @@ def sent_analyzer():
     text_to_analyze = request.args.get('textToAnalyze')
     # Pass the text to the emotion_detector function and store the response
     response = emotion_detector(text_to_analyze)
+    dominant_emotion = response['dominant_emotion']
+    #check if the dominant_emotion is none
+    if dominant_emotion is None:
+        return "Invalid text! try again"
     # Extract the anger, digust, fear, joy, sadness and dominant_emotion from the response
     anger = response['anger']
     disgust = response['disgust']
     fear = response['fear']
     joy = response['joy']
     sadness = response['sadness']
-    dominant_emotion = response['dominant_emotion']
     return f"'Anger': {anger}, 'disgust:' {disgust}, 'fear': {fear}, 'joy': {joy}, 'sadness': {sadness}, The dominant emotion is {dominant_emotion} "
 
 @app.route("/")
