@@ -1,4 +1,7 @@
-# Import Flask, render_template, request from the flask framework package 
+"""Server module for handling emotion analysis.
+This module processes emotions and determines the dominant one.
+"""
+# Import Flask, render_template, request from the flask framework package
 from flask import Flask, render_template, request
 # Import the emotion_detector function from the package created
 from EmotionDetection.emotion_detection import emotion_detector
@@ -6,6 +9,9 @@ from EmotionDetection.emotion_detection import emotion_detector
 app = Flask("Emotion Analyzer")
 @app.route("/emotionDetector")
 def sent_analyzer():
+    """Server module for handling emotion analysis.
+    This module processes emotions and determines the dominant one.
+    """
     # Retrieve the text to analyze from the request arguments
     text_to_analyze = request.args.get('textToAnalyze')
     # Pass the text to the emotion_detector function and store the response
@@ -20,8 +26,10 @@ def sent_analyzer():
     fear = response['fear']
     joy = response['joy']
     sadness = response['sadness']
-    return f"'Anger': {anger}, 'disgust:' {disgust}, 'fear': {fear}, 'joy': {joy}, 'sadness': {sadness}, The dominant emotion is {dominant_emotion} "
-
+    return (
+        f"'Anger': {anger}, 'disgust:' {disgust}, 'fear': {fear}, "
+        f"'joy': {joy}, 'sadness': {sadness}, The dominant emotion is {dominant_emotion} "
+    )
 @app.route("/")
 def render_index_page():
     ''' This function initiates the rendering of the main application
